@@ -10,8 +10,8 @@ export default class VideoTutorialRepository {
     this.videoInputs = filteredRows.map((row) =>  this.videoInputMap(row))
   }
 
-  private videoInputMap(row: string):VideoInput{ //map input rows to ParkingInput type accepted by Parking class
-    const formattedRow = row.split(',') //split based on , as csv format  
+  private videoInputMap(row: string):VideoInput{ //map input rows to VideoInput type accepted by this repo
+    const formattedRow = row.split(',') //split based on , as csv format
     return {
       id: Number(formattedRow[0].trim()),
       title: formattedRow[1].trim(),
@@ -25,7 +25,7 @@ export default class VideoTutorialRepository {
     let arrayToFilter = [...this.videoInputs]
     arrayToFilter = arrayToFilter.filter((video:VideoInput) => {
       let stringToFilter = searchTerm.toUpperCase()
-      if(video.category.toUpperCase().includes(stringToFilter)){
+      if(video.category.toUpperCase().includes(stringToFilter)){ 
         return video
       }
       if(video.title.toUpperCase().includes(stringToFilter)){
@@ -35,7 +35,7 @@ export default class VideoTutorialRepository {
         return video
       }
       if(!isNaN(searchTerm as any)){
-        if(video.id === Number(searchTerm)){
+        if(video.id === Number(searchTerm)){ //exact id matching for exact search
           return video
         }
       }
@@ -44,11 +44,11 @@ export default class VideoTutorialRepository {
   }
 
   public getVideoInputs(page: number, searchTerm?: string):VideoSearchReturn{
-    const arrayToSearch:Array<VideoInput> = searchTerm && searchTerm.length > 0 ? this.processQuery(searchTerm) : [...this.videoInputs]
+    const arrayToSearch:Array<VideoInput> = searchTerm && searchTerm.length > 0 ? this.processQuery(searchTerm) : [...this.videoInputs] //check if search term exist then filter by search term and only paginate the returned values
     let lastPage = Math.ceil(arrayToSearch.length/PAGE_LIMIT)
     let startPage = (page - 1) * PAGE_LIMIT
     let endPage = (page * PAGE_LIMIT) 
-    if(endPage > arrayToSearch.length){
+    if(endPage > arrayToSearch.length){ 
       endPage = arrayToSearch.length 
     }
     return {
