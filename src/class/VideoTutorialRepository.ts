@@ -16,7 +16,8 @@ export default class VideoTutorialRepository {
       id: Number(formattedRow[0].trim()),
       title: formattedRow[1].trim(),
       category: formattedRow[2].trim(),
-      imgUrl: formattedRow[3].trim()
+      imgUrl: formattedRow[3].trim(),
+      teacher: formattedRow[4].trim(),
     }
   }
 
@@ -28,6 +29,9 @@ export default class VideoTutorialRepository {
         return video
       }
       if(video.title.toUpperCase().includes(stringToFilter)){
+        return video
+      }
+      if(video.teacher.toUpperCase().includes(stringToFilter)){
         return video
       }
       if(!isNaN(searchTerm as any)){

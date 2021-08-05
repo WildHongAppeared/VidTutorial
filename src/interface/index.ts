@@ -4,6 +4,7 @@ export interface VideoInput { // interface to map input to actions
   title: string
   category: string
   imgUrl: string
+  teacher: string
 }
 
 export interface VideoSearchReturn { // interface to map input to actions

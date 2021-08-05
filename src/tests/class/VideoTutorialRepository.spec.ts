@@ -16,6 +16,7 @@ describe('VideoTutorialRepository Unit Test', () => {
     expect(data[0]).to.have.property('title')
     expect(data[0]).to.have.property('category')
     expect(data[0]).to.have.property('imgUrl')
+    expect(data[0]).to.have.property('teacher')
   })
 
   it('Should return correct number of rows', () => {
